@@ -1,62 +1,68 @@
-# Twilio SMS GitHub Action
+# Twilio SendGrid Send an Email GitHub Action
 
-Send an SMS from GitHub Actions.
+Send an Email from GitHub Actions.
 
 ## Prerequisites
 
-- A Twilio Account. [Sign up for free](https://www.twilio.com/try-twilio)
-- A [Twilio API Key and Secret](https://www.twilio.com/docs/iam/keys/api-key)
+- A Twilio SendGrid Account. [Sign up for free](https://https://signup.sendgrid.com/)
+- A [SendGrid API Key](https://app.sendgrid.com/settings/api_keys) The documentation can be viewed here. (https://sendgrid.com/docs/ui/account-and-settings/api-keys/)
 
 ## Usage
 
-1. Set up your credentials as secrets in your repository settings using `TWILIO_ACCOUNT_SID`, `TWILIO_API_KEY`, `TWILIO_API_SECRET`
+1. Create an API Key to access the API.
 
-2. Add the following to your workflow
+2. Store the key in  `SENDGRID_API_KEY`
+
+3. Create an Unsubscribe Group for the email receipents to unsubscribe from. This can be done here (https://app.sendgrid.com/suppressions/group_unsubscribes) and documentation here (https://sendgrid.com/docs/ui/sending-email/group-unsubscribes/#gatsby-focus-wrapper)
+
+4. (Optional) Create an Email Template here: https://mc.sendgrid.com/dynamic-templates 
+
+5. Add the following to your workflow
 
 ```yml
-- name: 'Sending SMS Notification'
-  uses: twilio-labs/actions-sms@v1
+- name: 'Sending Email with SendGrid'
+  uses: mmeisels/action-send-an-email-@v1
   with:
-    fromPhoneNumber: '+1(234)5678901'
-    toPhoneNumber: '+1(234)3334444'
-    message: 'Hello from Twilio'
+    emailToAddress: 'test@mike.com'
+    emailFromAddress: 'from@mike.com'
+    emailBody: 'email body text - can be html also'
+    unSubscribeGroupID: 'unsusbcribe group ID from step 3'
+    emailTemplateID: 'Email Template ID from Step 4'
   env:
-    TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-    TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
-    TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
+    SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
 ```
 
 ## Inputs
 
-### `fromPhoneNumber`
+### `emailToAddress`
 
-**Required** Phone number in your Twilio account to send the SMS from
+**Required** This is the Email Address you wish to send an email to
 
-### `toPhoneNumber`
+### `emailFromAddress`
 
-**Required** Phone number to send the SMS to
+**Required** This is the Email Address you wish to send an email from
 
-### `message`
+### `SENDGRID_API_KEY`
 
-**Required** The message you want to send
+**Required** The SendGrid API Key
 
-### `TWILIO_ACCOUNT_SID`
+### `emailBody`
 
-A Twilio Account SID. Can alternatively be stored in environment
+If you are not using an email template, you need to pass the email body either as text or html in the message
 
-### `TWILIO_API_KEY`
+### `unSubscribeGroupID`
 
-A Twilio API Key. Can alternatively be stored in environment
+The SendGrid Unsubscribe Group
 
-### `TWILIO_API_SECRET`
+### `emailTemplateID`
 
-A Twilio API Secret. Can alternatively be stored in environment
+The SendGrid Email Template ID from Step 4
 
 ## Outputs
 
-### `messageSid`
+### `response`
 
-The SID of the [message resource](https://www.twilio.com/docs/sms/api/message-resource#message-properties) associated with the SMS sent.
+The Response of the Email Interaction. Emails are Async - you can review the actual email response in the SendGrid Analytics or setup a webhook.
 
 ## Contributing
 

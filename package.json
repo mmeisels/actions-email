@@ -9,27 +9,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twilio-labs/actions-sms.git"
+    "url": "git+https://github.com/mmeisels/actions-email.git"
   },
   "keywords": [
     "github",
     "actions",
-    "twilio",
-    "sms"
+    "Twilio SendGrid",
+    "Email"
   ],
-  "author": "Dominik Kundel <dkundel@twilio.com> (https://twilio.com/labs)",
+  "author": "Michael Meisels <mmeisels@twilio.com> (https://twilio.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/twilio-labs/actions-sms/issues"
+    "url": "https://github.com/mmeisels/actions-email/issues"
   },
-  "homepage": "https://github.com/twilio-labs/actions-sms#readme",
+  "homepage": "https://github.com/mmeisels/actions-email#readme",
   "dependencies": {
     "@actions/core": "^1.1.0",
-    "twilio": "^3.34.0"
+    "@sendgrid/mail": "^6.5.4"
   },
   "devDependencies": {
     "husky": "^3.0.5",
-    "jest": "^24.9.0",
+    "jest": "^25.1.0",
     "typescript": "^3.6.3"
   },
   "husky": {
