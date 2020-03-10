@@ -1,0 +1,41 @@
+{
+  "name": "action-send-an-email",
+  "version": "1.0.0",
+  "description": "Send an Email through GitHub Actions",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twilio-labs/actions-sms.git"
+  },
+  "keywords": [
+    "github",
+    "actions",
+    "twilio",
+    "sms"
+  ],
+  "author": "Dominik Kundel <dkundel@twilio.com> (https://twilio.com/labs)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twilio-labs/actions-sms/issues"
+  },
+  "homepage": "https://github.com/twilio-labs/actions-sms#readme",
+  "dependencies": {
+    "@actions/core": "^1.1.0",
+    "twilio": "^3.34.0"
+  },
+  "devDependencies": {
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "typescript": "^3.6.3"
+  },
+  "husky": {
+    "skipCI": true,
+    "hooks": {
+      "post-commit": "npm prune --production && git add node_modules/* && git commit -m \"chore: update node_modules\" && npm install"
+    }
+  }
+}

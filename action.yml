@@ -1,0 +1,31 @@
+name: 'Twilio SendGrid Email'
+author: 'Michael Meisels'
+description: 'Send an Email using Twilio SendGrid from GitHub Actions using Twilio SendGrid API'
+inputs:
+  emailToAddress:
+    description: 'Email To Address'
+    required: true
+  emailFromAddress:
+    description: 'Email From Address'
+    required: true
+  emailBody:
+    description: 'The email body you want to send'
+    required: true
+  emailTemplateID:
+    description: 'The SendGrid Email Template ID'
+    required: false
+  SENDGRID_API_KEY:
+    description: 'The SendGrid API Key using to authenticate with'
+    required: true
+  unSubscribeGroupID:
+    description: 'The SendGrid Unsubscribe Group ID'
+    required: false
+outputs:
+  messageSid:
+    description: 'The Twilio Message SID'
+runs:
+  using: 'node12'
+  main: 'dist/main.js'
+branding:
+  color: 'red'
+  icon: 'message-circle'
